@@ -1,0 +1,20 @@
+# ignore target dir
+*target/
+target/
+*logs/
+*.iml
+*/.idea
+.idea
+*.swp
+*.log
+/data/*
+libs
+adapter.csv
+store_lock
+bin/*
+!/.project
+.project
+.settings
+.DS_Store
+.gradle/
+build/
