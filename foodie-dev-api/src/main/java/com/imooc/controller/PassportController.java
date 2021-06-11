@@ -4,18 +4,23 @@ import com.imooc.pojo.Users;
 import com.imooc.pojo.bo.UserBO;
 import com.imooc.service.UserService;
 import com.imooc.utils.IMOOCJSONResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/passport")
+@Api(value = "注册登陆",tags = {"用于用户注册登陆的相关接口"})
 public class PassportController {
     @Autowired
     private UserService userService;
 
     @GetMapping("/usernameIsExist")
-    public IMOOCJSONResult usernameIsExist(@RequestParam("username")String username) {
+    @ApiOperation(value = "判断用户是否存在",notes = "判断用户是否存在备注",httpMethod = "GET")
+    public IMOOCJSONResult usernameIsExist(@RequestParam(value = "username",defaultValue = "aaa")String username) {
         if (StringUtils.isBlank(username)) {
             return IMOOCJSONResult.errorMsg("用户名不能为空");
         }
@@ -27,6 +32,7 @@ public class PassportController {
     }
 
     @PostMapping("/regist")
+    @ApiOperation(value = "用户注册",notes = "用户注册备注",httpMethod = "POST")
     public IMOOCJSONResult regist(@RequestBody UserBO userBO) {
         String username = userBO.getUsername();
         String password = userBO.getPassword();
