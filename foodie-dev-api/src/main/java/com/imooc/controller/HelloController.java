@@ -1,5 +1,6 @@
 package com.imooc.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
@@ -12,10 +13,15 @@ import springfox.documentation.annotations.ApiIgnore;
  */
 @RestController
 @ApiIgnore
+@Slf4j
 public class HelloController {
 
     @GetMapping("/hello")
     public String hello(){
+        log.debug("debug");
+        log.info("info");
+        log.warn("warn");
+        log.error("error");
         return "hello world!";
     }
 }
