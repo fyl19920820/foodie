@@ -18,6 +18,7 @@ public class CorsConfig {
         corsConfiguration.addAllowedOrigin("http://localhost:8080");
         corsConfiguration.addAllowedOrigin("http://49.233.2.43:8080");
         corsConfiguration.addAllowedOrigin("http://49.233.2.43:8000");
+        corsConfiguration.addAllowedOrigin("http://49.233.2.43:8001");
 
         //设置是否发送cookie信息
         corsConfiguration.setAllowCredentials(true);
