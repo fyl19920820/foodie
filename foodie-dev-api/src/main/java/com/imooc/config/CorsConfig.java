@@ -16,7 +16,8 @@ public class CorsConfig {
         //1.添加cros配置信息
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("http://localhost:8080");
-        corsConfiguration.addAllowedOrigin("http://www.fengyunlong.xyz:8080");
+        corsConfiguration.addAllowedOrigin("http://49.233.2.43:8080");
+        corsConfiguration.addAllowedOrigin("http://49.233.2.43:8000");
 
         //设置是否发送cookie信息
         corsConfiguration.setAllowCredentials(true);
