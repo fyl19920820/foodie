@@ -1,9 +1,23 @@
 package com.imooc.pojo.vo;
 
+import com.imooc.pojo.bo.ShopcartBO;
+
+import java.util.List;
+
 public class OrderVO {
 
     private String orderId;
     private MerchantOrdersVO merchantOrdersVO;
+
+    public List<ShopcartBO> getToBeRemovedShopcatdList() {
+        return toBeRemovedShopcatdList;
+    }
+
+    public void setToBeRemovedShopcatdList(List<ShopcartBO> toBeRemovedShopcatdList) {
+        this.toBeRemovedShopcatdList = toBeRemovedShopcatdList;
+    }
+
+    private List<ShopcartBO> toBeRemovedShopcatdList;
 
     public String getOrderId() {
         return orderId;
