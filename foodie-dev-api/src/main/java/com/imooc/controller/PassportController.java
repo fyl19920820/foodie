@@ -3,6 +3,7 @@ package com.imooc.controller;
 import com.imooc.pojo.Users;
 import com.imooc.pojo.bo.ShopcartBO;
 import com.imooc.pojo.bo.UserBO;
+import com.imooc.pojo.vo.UsersVO;
 import com.imooc.service.UserService;
 import com.imooc.utils.*;
 import io.swagger.annotations.Api;
@@ -68,16 +69,19 @@ public class PassportController extends BaseController {
             return IMOOCJSONResult.errorMsg("两次密码不一致");
         }
 
-        Users user = userService.createUser(userBO);
-        user = setNullProperty(user);
+        Users userResult = userService.createUser(userBO);
+//        user = setNullProperty(user);
 
-        CookieUtils.setCookie(request,response,"user",JsonUtils.objectToJson(user),true);
+        // 实现用户的redis会话
+        UsersVO usersVO = conventUsersVO(userResult);
 
-        // TODO 生成用户token，存入redis会话
+        CookieUtils.setCookie(request, response, "user",
+                JsonUtils.objectToJson(usersVO), true);
+
         // 同步购物车数据
-        synchShopcartData(user.getId(), request, response);
+        synchShopcartData(userResult.getId(), request, response);
 
-        return IMOOCJSONResult.ok(user);
+        return IMOOCJSONResult.ok(userResult);
     }
 
     @ApiOperation(value = "用户登录", notes = "用户登录", httpMethod = "POST")
@@ -103,12 +107,12 @@ public class PassportController extends BaseController {
             return IMOOCJSONResult.errorMsg("用户名或密码不正确");
         }
 
-        userResult = setNullProperty(userResult);
+//        userResult = setNullProperty(userResult);
+        // 实现用户的redis会话
+        UsersVO usersVO = conventUsersVO(userResult);
 
         CookieUtils.setCookie(request, response, "user",
-                JsonUtils.objectToJson(userResult), true);
-
-        // TODO 生成用户token，存入redis会话
+                JsonUtils.objectToJson(usersVO), true);
         // 同步购物车数据
         synchShopcartData(userResult.getId(), request, response);
 
